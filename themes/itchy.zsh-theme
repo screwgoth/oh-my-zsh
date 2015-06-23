@@ -9,7 +9,18 @@ local pwd="%{$fg[yellow]%}%~%{$reset_color%}"
 PROMPT='${user}${host} ${pwd}
 ${smiley}  '
 
-RPROMPT='$(rvm-prompt || rbenv version) %{$fg[white]%}$(git_prompt_info)%{$reset_color%}'
+if [[ "rvm-prompt not found" == $(type rvm-prompt) ]]; then
+    rp=""
+fi
+if [[ "rbenv not found" == $(type rbenv) ]]; then
+    rb=""
+fi
+
+if [ -z "$rp"] || [ -z "$rb" ]; then
+    RPROMPT='%{$fg[white]%}$(git_prompt_info)%{$reset_color%}'
+else
+    RPROMPT='$(rvm-prompt || rbenv version) %{$fg[white]%}$(git_prompt_info)%{$reset_color%}'
+fi
 
 ZSH_THEME_GIT_PROMPT_PREFIX=""
 ZSH_THEME_GIT_PROMPT_SUFFIX=""

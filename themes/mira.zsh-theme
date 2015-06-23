@@ -13,11 +13,19 @@ else
   fi
 fi
 
-local nvm_node=''
-nvm_node='%{$fg[green]%}‹node-$(nvm_prompt_info)›%{$reset_color%}'
+local nvm_p_i=$(nvm_prompt_info)
+if [[ "$nvm_p_i"x == "x" ]]; then
+    local nvm_node=''
+else
+    nvm_node='%{$fg[green]%}‹node-$(nvm_prompt_info)›%{$reset_color%}'
+fi
 
-local jenv_java=''
-jenv_java='%{$fg[blue]%}‹$(jenv_prompt_info)›%{$reset_color%}'
+local jenv_p_i=$(type jenv_prompt_info)
+if [[ "$jvm_p_i"x == "x" ]]; then
+    local jenv_java=''
+else
+    jenv_java='%{$fg[blue]%}‹$(jenv_prompt_info)›%{$reset_color%}'
+fi
 
 local git_branch='$(git_prompt_info)%{$reset_color%}'
 

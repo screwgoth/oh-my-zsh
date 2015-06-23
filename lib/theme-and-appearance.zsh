@@ -14,6 +14,8 @@ then
     # On OpenBSD, test if "colorls" is installed (this one supports colors);
     # otherwise, leave ls as is, because OpenBSD's ls doesn't support -G
     colorls -G -d . &>/dev/null 2>&1 && alias ls='colorls -G'
+  elif  [[ "$(uname -s)" == "Darwin" ]]; then
+    ls --color -d . &>/dev/null 2>&1 && alias ls='ls -G'
   else
     ls --color -d . &>/dev/null 2>&1 && alias ls='ls --color=tty' || alias ls='ls -G'
   fi
